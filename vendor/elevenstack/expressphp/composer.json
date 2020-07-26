@@ -1,0 +1,29 @@
+{
+    "name": "elevenstack/expressphp",
+    "description": "Pacote para roteamento",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "type": "library",
+    "keywords": [
+        "Router",
+        "Roteamento",
+        "elevenstack",
+        "express",
+        "Expressphp"
+    ],
+    "authors": [
+        {
+            "name": "Guilherme-j10",
+            "email": "guilhermeZA.123123@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload":{
+        "psr-4":{
+            "elevenstack\\expressphp\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.2"
+    }
+}

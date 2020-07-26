@@ -1,0 +1,18 @@
+{
+    "name": "guilh/criptografia",
+    "authors": [
+        {
+            "name": "Guilherme-j10",
+            "email": "guilhermeZA.123123@gmail.com"
+        }
+    ],
+    "autoload":{
+        "psr-4":{
+            "src/app\\": "src/app/",
+            "src\\": "src/"
+        }
+    },
+    "require": {
+        "elevenstack/expressphp": "^2.0"
+    }
+}
