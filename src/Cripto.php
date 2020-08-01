@@ -1,132 +1,12 @@
 <?php
 
     namespace src;
+    use src\Matriz;
 
-    class Cripto 
+    class Cripto extends Matriz
     {
 
         protected $key;
-        protected $key_avaliable = ['k9', 'k10'];
-        protected $simple_matriz = [
-            'k9' => [
-                'AML4' => 'a',
-                'UB4f' => 'b',
-                'Pmle' => 'c',
-                'Pq01' => 'd'
-            ],
-            'k10' => [
-                '&zsf' => '0', 
-                '/h7H' => '1',
-                'u%a7' => '2',
-                'pO8T' => '3',
-                'M@pY' => '4',
-                'dMEu' => '5',
-                'X0lW' => '6',
-                'A95T' => '7',
-                '2vCN' => '8',
-                'H6nT' => '9',
-                '8G4x' => 'a',
-                'HiKF' => 'b',
-                '5!de' => 'c',
-                'Omif' => 'd',
-                'xnqK' => 'e',
-                'J!Xn' => 'f',
-                'WiKu' => 'g',
-                '8aUr' => 'h',
-                '214b' => 'i',
-                'WgJN' => 'j',
-                '7MK9' => 'k',
-                'oOcH' => 'l',
-                '0xmk' => 'm',
-                'C3En' => 'n',
-                'cEuJ' => 'o',
-                'H6T%' => 'p',
-                'mPps' => 'q',
-                'D6TL' => 'r',
-                'vOe7' => 's',
-                'XwmM' => 't',
-                '1GF7' => 'u',
-                'G/Xy' => 'v',
-                'jeyP' => 'w',
-                'DI7W' => 'x',
-                'LkX4' => 'y',
-                'FRA6' => 'z',
-                'G2Rw' => ' ',
-                'A5Zt' => '(',
-                '054F' => ')',
-                '4wzm' => '-',
-                '20FI' => '!',
-                '90CE' => '@',
-                'P2SI' => '#',
-                '83cd' => '$',
-                '4dor' => '%',
-                '3Mpe' => '¨',
-                '40px' => '&',
-                '01en' => '*',
-                'u5n!' => '_',
-                'T6nv' => '+',
-                '02cF' => '=',
-                '94vh' => '^',
-                '93NF' => '~',
-                '01hf' => '[',
-                '0pzd' => ']',
-                'tko3' => '{',
-                'lebt' => '}',
-                'pzwm' => '/',
-                'EMt4' => '?',
-                '!Drd' => '.',
-                '354D' => '>',
-                'EDad' => ',',
-                'oEtd' => '<',
-                '3Lps' => '|',
-                '9Xet' => '\\',
-                'Aqw3' => ':',
-                'tvG4' => ';',
-                'Na4r' => '//',
-                '1mpE' => '"',
-                'ebTt' => '\'',
-                'EgUl' => 'Á',
-                'K4Mt' => 'Ã',
-                '1b04' => 'ã',
-                'V5Ht' => 'á',
-                '2wnt' => 'É',
-                'Pl4v' => 'é',
-                'psls' => 'Í',
-                'ptdb' => 'í',
-                'TbT5' => 'Ó',
-                'QmPr' => 'ó',
-                '3F4g' => 'Ú',
-                'qmpD' => 'ú',
-                '5vwW' => 'à',
-                'ypEt' => 'À',
-                'eMpT' => 'A',
-                'Te/t' => 'B',
-                '7Rdt' => 'C',
-                'Anle' => 'D',
-                'gmer' => 'E',
-                'RFtp' => 'F',
-                'KtMe' => 'G',
-                '4C7f' => 'H',
-                '1X53' => 'I',
-                'QmpS' => 'J',
-                '5cPr' => 'K',
-                'P2P2' => 'L',
-                'MO3L' => 'M',
-                'pe07' => 'N',
-                'Uzrt' => 'O',
-                'c5p!' => 'P',
-                'Pled' => 'Q',
-                'EVrt' => 'R',
-                'PzTq' => 'S',
-                'P01T' => 'T',
-                'cpqt' => 'U',
-                '74!r' => 'V',
-                'LaT5' => 'W',
-                'vIn3' => 'X',
-                'W1Kg' => 'Y',
-                'PH1J' => 'Z',
-            ] 
-        ];
 
         public function __construct(String $key)
         {
@@ -147,12 +27,48 @@
                 } 
             }
 
-            return $output;
+            return $this->security($output, 'add');
+        }
+        
+        private function security(String $string, String $type_sec) : String
+        {   
+            switch ($type_sec) {
+                case 'add':
+
+                    $split_string = str_split($string);
+                    $string_reverse = array_reverse($split_string);
+                    $final_string = implode('', $string_reverse);
+
+                    $encode_64 = base64_encode($final_string);
+                    $getout = explode('=', $encode_64);
+                    $return_string = implode('', $getout);
+
+                    return $return_string;
+
+                break;
+                case 'remove':
+
+                    $encode_64 = base64_decode($string);
+
+                    $split_string = str_split($encode_64);
+                    $string_reverse = array_reverse($split_string);
+                    $final_string = implode('', $string_reverse);
+
+                    return $final_string;
+
+                break;
+                default:
+                    return false;
+                break;
+            }
+
+            
         }
 
         public function decript(String $String): String
         {
-            $string = preg_split("/(?<!^)(?!$)/u", $String);
+            $remove_secur = $this->security($String, 'remove');
+            $string = preg_split("/(?<!^)(?!$)/u", $remove_secur);
 
             $index_value = count($string) / 4;
             $a = 0;

@@ -70,7 +70,7 @@
         </main>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script>
-            setInterval(() => {
+            document.querySelector('body').addEventListener('keyup', (e) => {
                 let input = document.getElementById('input_primary').value;
                 let input_encode = document.getElementById('encode');
 
@@ -86,7 +86,28 @@
                 }).always(function(){
                     //console.log('completou');
                 })
-            }, 100);
+
+                console.log('update');
+            });
+
+            // setInterval(()=>{
+            //     let input = document.getElementById('input_primary').value;
+            //     let input_encode = document.getElementById('encode');
+
+            //     $.ajax({
+            //         url: "<?= SITE_NAME.'recived_data' ?>",
+            //         type: "POST",
+            //         data: "campo_um="+input,
+            //         dataType: "html"
+            //     }).done(function(data){
+            //         input_encode.value = data
+            //     }).fail(function(jqXHR, textStatus){
+            //         //console.log("Request failed: " + textStatus);
+            //     }).always(function(){
+            //         //console.log('completou');
+            //     })
+            // }, 100)
+
         </script>
     </body>
 </html>
