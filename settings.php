@@ -1,9 +1,9 @@
 <?php
 
-    $production_mode = false;
+    $production_mode = true;
 
     if($production_mode){
-        define('SITE_NAME', 'http://'.$_SERVER['HTTP_HOST'].'/');
+        define('SITE_NAME', 'https://'.$_SERVER['HTTP_HOST'].'/');
     }else{
         define('SITE_NAME', 'http://'.$_SERVER['HTTP_HOST'].'/criptografia/');
     }
