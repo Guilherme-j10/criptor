@@ -1,7 +1,7 @@
 <?php
 
     namespace elevenstack\expressphp;
-    error_reporting(0);
+    //error_reporting(0);
 
     use elevenstack\expressphp\TreatmentRoute as Router;
 
